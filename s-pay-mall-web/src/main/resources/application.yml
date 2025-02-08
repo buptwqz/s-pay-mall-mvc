@@ -1,0 +1,5 @@
+spring:
+  config:
+    name: s-pay-mall-mvc-wqz
+  profiles:
+    active: dev

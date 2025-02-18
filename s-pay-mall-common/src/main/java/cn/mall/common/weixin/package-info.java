@@ -4,4 +4,4 @@
  * Date:   2025/2/8 下午12:15
  * GitHub: https://github.com/buptwqz
  **/
-package cn.mall.common;
+package cn.mall.common.weixin;

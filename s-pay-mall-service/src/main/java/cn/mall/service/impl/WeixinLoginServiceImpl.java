@@ -1,10 +1,9 @@
 package cn.mall.service.impl;
 
-import cn.mall.domain.vo.WeixinTemplateMessageVO;
 import cn.mall.domain.req.WeixinQrCodeReq;
 import cn.mall.domain.res.WeixinQrCodeRes;
-
 import cn.mall.domain.res.WeixinTokenRes;
+import cn.mall.domain.vo.WeixinTemplateMessageVO;
 import cn.mall.service.ILoginService;
 import cn.mall.service.weixin.IWeixinApiService;
 import com.google.common.cache.Cache;
@@ -14,6 +13,8 @@ import retrofit2.Call;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Author: Qizheng Wang
@@ -35,16 +36,17 @@ public class WeixinLoginServiceImpl implements ILoginService {
     private Cache<String, String> weixinAccessToken;
 
     @Resource
-    private Cache<String,String> openidToken;
+    private Cache<String, String> openidToken;
 
     @Resource
     private IWeixinApiService weixinApiService;
+
     @Override
     public String createQrCodeTicket() throws IOException {
         // 1.获取accessToken 本地缓存
         // TODO: 把存储修改为Redis
         String accessToken = weixinAccessToken.getIfPresent(appid);
-        if(accessToken == null) {
+        if (accessToken == null) {
             Call<WeixinTokenRes> call = weixinApiService.getToken("client_credential", appid, appSecret);
             WeixinTokenRes weixinTokenRes = call.execute().body();
             assert weixinTokenRes != null;
@@ -75,7 +77,30 @@ public class WeixinLoginServiceImpl implements ILoginService {
     }
 
     @Override
-    public void saveLoginState(String ticket, String openId) {
-        openidToken.put(ticket, openId);
+    public void saveLoginState(String ticket, String openid) throws IOException {
+        openidToken.put(ticket, openid);
+
+        // 1. 获取 accessToken 【实际业务场景，按需处理下异常】
+        String accessToken = weixinAccessToken.getIfPresent(appid);
+        if (null == accessToken) {
+            Call<WeixinTokenRes> call = weixinApiService.getToken("client_credential", appid, appSecret);
+            WeixinTokenRes weixinTokenRes = call.execute().body();
+            assert weixinTokenRes != null;
+            accessToken = weixinTokenRes.getAccess_token();
+            weixinAccessToken.put(appid, accessToken);
+        }
+
+        // 2. 发送模板消息
+        Map<String, Map<String, String>> data = new HashMap<>();
+        WeixinTemplateMessageVO.put(data, WeixinTemplateMessageVO.TemplateKey.USER, openid);
+
+        WeixinTemplateMessageVO templateMessageDTO = new WeixinTemplateMessageVO(openid, template_id);
+        templateMessageDTO.setUrl("https://gaga.plus");
+        templateMessageDTO.setData(data);
+
+        Call<Void> call = weixinApiService.sendMessage(accessToken, templateMessageDTO);
+        call.execute();
+
     }
+
 }

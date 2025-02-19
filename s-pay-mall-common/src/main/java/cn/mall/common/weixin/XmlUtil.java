@@ -7,6 +7,7 @@ package cn.mall.common.weixin;
  * GitHub: https://github.com/buptwqz
  * Description:
  **/
+
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.core.util.QuickWriter;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;

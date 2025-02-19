@@ -36,7 +36,7 @@ public interface IWeixinApiService {
      * 文档：<a href="https://developers.weixin.qq.com/doc/offiaccount/Account_Management/Generating_a_Parametric_QR_Code.html">Generating_a_Parametric_QR_Code</a>
      * <a href="https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=TICKET">前端根据凭证展示二维码</a>
      *
-     * @param accessToken            getToken 获取的 token 信息
+     * @param accessToken     getToken 获取的 token 信息
      * @param weixinQrCodeReq 入参对象
      * @return 应答结果
      */
@@ -47,7 +47,7 @@ public interface IWeixinApiService {
      * 发送微信公众号模板消息
      * 文档：https://mp.weixin.qq.com/debug/cgi-bin/readtmpl?t=tmplmsg/faq_tmpl
      *
-     * @param accessToken              getToken 获取的 token 信息
+     * @param accessToken             getToken 获取的 token 信息
      * @param weixinTemplateMessageVO 入参对象
      * @return 应答结果
      */

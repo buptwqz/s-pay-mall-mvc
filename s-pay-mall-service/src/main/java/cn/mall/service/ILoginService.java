@@ -13,5 +13,5 @@ public interface ILoginService {
 
     String checkLogin(String ticket);
 
-    void saveLoginState(String ticket, String openId);
+    void saveLoginState(String ticket, String openId) throws IOException;
 }

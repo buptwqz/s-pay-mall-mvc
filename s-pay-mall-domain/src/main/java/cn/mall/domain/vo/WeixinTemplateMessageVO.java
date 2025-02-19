@@ -21,16 +21,6 @@ public class WeixinTemplateMessageVO {
         this.template_id = template_id;
     }
 
-    public void put(TemplateKey key, String value) {
-        data.put(key.getCode(), new HashMap<String, String>() {
-            private static final long serialVersionUID = 7092338402387318563L;
-
-            {
-                put("value", value);
-            }
-        });
-    }
-
     public static void put(Map<String, Map<String, String>> data, TemplateKey key, String value) {
         data.put(key.getCode(), new HashMap<String, String>() {
             private static final long serialVersionUID = 7092338402387318563L;
@@ -41,36 +31,15 @@ public class WeixinTemplateMessageVO {
         });
     }
 
+    public void put(TemplateKey key, String value) {
+        data.put(key.getCode(), new HashMap<String, String>() {
+            private static final long serialVersionUID = 7092338402387318563L;
 
-    public enum TemplateKey {
-        USER("user","用户ID")
-        ;
-
-        private String code;
-        private String desc;
-
-        TemplateKey(String code, String desc) {
-            this.code = code;
-            this.desc = desc;
-        }
-
-        public String getCode() {
-            return code;
-        }
-
-        public void setCode(String code) {
-            this.code = code;
-        }
-
-        public String getDesc() {
-            return desc;
-        }
-
-        public void setDesc(String desc) {
-            this.desc = desc;
-        }
+            {
+                put("value", value);
+            }
+        });
     }
-
 
     public String getTouser() {
         return touser;
@@ -102,6 +71,34 @@ public class WeixinTemplateMessageVO {
 
     public void setData(Map<String, Map<String, String>> data) {
         this.data = data;
+    }
+
+    public enum TemplateKey {
+        USER("user", "用户ID");
+
+        private String code;
+        private String desc;
+
+        TemplateKey(String code, String desc) {
+            this.code = code;
+            this.desc = desc;
+        }
+
+        public String getCode() {
+            return code;
+        }
+
+        public void setCode(String code) {
+            this.code = code;
+        }
+
+        public String getDesc() {
+            return desc;
+        }
+
+        public void setDesc(String desc) {
+            this.desc = desc;
+        }
     }
 
 }

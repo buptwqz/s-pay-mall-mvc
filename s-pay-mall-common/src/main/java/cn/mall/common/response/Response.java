@@ -6,6 +6,7 @@ package cn.mall.common.response;
  * Date:   2025/2/9 下午9:32
  * GitHub: https://github.com/buptwqz
  **/
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

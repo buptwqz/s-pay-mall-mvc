@@ -2,8 +2,6 @@ package cn.mall.config;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import com.google.common.eventbus.EventBus;
-import org.checkerframework.checker.units.qual.C;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

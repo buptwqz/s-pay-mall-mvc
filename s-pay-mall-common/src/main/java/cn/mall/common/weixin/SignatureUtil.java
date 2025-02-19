@@ -7,6 +7,7 @@ package cn.mall.common.weixin;
  * GitHub: https://github.com/buptwqz
  * Description:
  **/
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 

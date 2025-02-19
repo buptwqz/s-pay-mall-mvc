@@ -1,4 +1,5 @@
 package cn.mall.controller;
+
 import cn.mall.common.weixin.MessageTextEntity;
 import cn.mall.common.weixin.SignatureUtil;
 import cn.mall.common.weixin.XmlUtil;

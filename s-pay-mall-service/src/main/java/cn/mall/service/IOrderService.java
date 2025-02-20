@@ -4,6 +4,8 @@ import cn.mall.domain.po.PayOrder;
 import cn.mall.domain.req.ShopCartReq;
 import cn.mall.domain.res.PayOrderRes;
 
+import java.util.List;
+
 /**
  * Author: Qizheng Wang
  * Email:  879680229@qq.com
@@ -13,4 +15,13 @@ import cn.mall.domain.res.PayOrderRes;
  **/
 public interface IOrderService {
     PayOrderRes createOrder(ShopCartReq shopCartReq) throws Exception;
+
+    void changeOrderPaySuccess(String orderId);
+
+    List<String> queryNoPayNotifyOrder();
+
+    List<String> queryTimeoutCloseOrderList();
+
+    boolean changeOrderClose(String orderId);
+
 }

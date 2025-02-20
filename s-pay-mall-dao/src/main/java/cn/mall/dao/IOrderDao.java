@@ -1,6 +1,10 @@
 package cn.mall.dao;
 
 import cn.mall.domain.po.PayOrder;
+import com.sun.tracing.dtrace.ModuleAttributes;
+import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * Author: Qizheng Wang
@@ -9,8 +13,19 @@ import cn.mall.domain.po.PayOrder;
  * GitHub: https://github.com/buptwqz
  * Description:
  **/
+@Mapper
 public interface IOrderDao {
-    void insert(PayOrder order);
+    void insert(PayOrder payOrder);
+
+    void updateOrderPayInfo(PayOrder payOrder);
+
+    void changeOrderPaySuccess(PayOrder order);
+
+    List<String> queryNoPayNotifyOrder();
+
+    List<String> queryTimeoutCloseOrderList();
+
+    boolean changeOrderClose(String orderId);
 
     PayOrder queryUnpayOrder(PayOrder payOrderReq);
 
